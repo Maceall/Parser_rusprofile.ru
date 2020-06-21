@@ -74,8 +74,8 @@ def parser(html, proxy = None, user_agent = None):
         
         count_ogrn = 1
         while count_ogrn <= len(find_ogrn): 
-            b = find_ogrn[count_ogrn].text.strip().replace(' ', '').replace('\n','')
-            com_ogrn.append(b.split('ОГРН')[1].split('Датарегистрации')[0])
+            strip_ogrn = find_ogrn[count_ogrn].text.strip().replace(' ', '').replace('\n','')
+            com_ogrn.append(strip_ogrn.split('ОГРН')[1].split('Датарегистрации')[0])
             count_ogrn = count_ogrn + 3
         
         # поиск статуса организации
@@ -91,47 +91,47 @@ def parser(html, proxy = None, user_agent = None):
         count_reg_date = 1
         while count_reg_date <= len(find_ogrn): 
             
-            b = find_ogrn[count_reg_date].text.strip().replace(' ', '').replace('\n','')
+            strip_reg_date = find_ogrn[count_reg_date].text.strip().replace(' ', '').replace('\n','')
         
-            c = b.split('Датарегистрации')[1].split('г.')[0]
+            strip_date = strip_reg_date.split('Датарегистрации')[1].split('г.')[0]
         
         # перевод текста даты в формат БД (YYYY-MM-DD)
-            if re.search('января',c) != None:
-                e = c.split('января')
-                com_reg_date.append('{}''-01-''{}'.format(e[1],e[0]))
-            elif re.search('февраля',c) != None:
-                e = c.split('февраля')
-                com_reg_date.append('{}''-02-''{}'.format(e[1],e[0]))
-            elif re.search('марта',c) != None:
-                e = c.split('марта')
-                com_reg_date.append('{}''-03-''{}'.format(e[1],e[0]))
-            elif re.search('апреля',c) != None:
-                e = c.split('апреля')
-                com_reg_date.append('{}''-04-''{}'.format(e[1],e[0]))
-            elif re.search('мая',c) != None:
-                e = c.split('мая')
-                com_reg_date.append('{}''-05-''{}'.format(e[1],e[0]))
-            elif re.search('июня',c) != None:
-                e = c.split('июня')
-                com_reg_date.append('{}''-06-''{}'.format(e[1],e[0]))
-            elif re.search('июля',c) != None:
-                e = c.split('июля')
-                com_reg_date.append('{}''-07-''{}'.format(e[1],e[0]))
-            elif re.search('августа',c) != None:
-                e = c.split('августа')
-                com_reg_date.append('{}''-08-''{}'.format(e[1],e[0]))
-            elif re.search('сентября',c) != None:
-                e = c.split('сентября')
-                com_reg_date.append('{}''-09-''{}'.format(e[1],e[0]))
-            elif re.search('октября',c) != None:
-                e = c.split('октября')
-                com_reg_date.append('{}''-10-''{}'.format(e[1],e[0]))
-            elif re.search('ноября',c) != None:
-                e = c.split('ноября')
-                com_reg_date.append('{}''-11-''{}'.format(e[1],e[0]))
-            elif re.search('декабря',c) != None:
-                e = c.split('декабря')
-                com_reg_date.append('{}''-12-''{}'.format(e[1],e[0]))
+            if re.search('января',strip_date) != None:
+                true_date = strip_date.split('января')
+                com_reg_date.append('{}''-01-''{}'.format(true_date[1],true_date[0]))
+            elif re.search('февраля',strip_date) != None:
+                true_date = strip_date.split('февраля')
+                com_reg_date.append('{}''-02-''{}'.format(true_date[1],true_date[0]))
+            elif re.search('марта',strip_date) != None:
+                true_date = strip_date.split('марта')
+                com_reg_date.append('{}''-03-''{}'.format(true_date[1],true_date[0]))
+            elif re.search('апреля',strip_date) != None:
+                true_date = strip_date.split('апреля')
+                com_reg_date.append('{}''-04-''{}'.format(true_date[1],true_date[0]))
+            elif re.search('мая',strip_date) != None:
+                true_date = strip_date.split('мая')
+                com_reg_date.append('{}''-05-''{}'.format(true_date[1],true_date[0]))
+            elif re.search('июня',strip_date) != None:
+                true_date = strip_date.split('июня')
+                com_reg_date.append('{}''-06-''{}'.format(true_date[1],true_date[0]))
+            elif re.search('июля',strip_date) != None:
+                true_date = strip_date.split('июля')
+                com_reg_date.append('{}''-07-''{}'.format(true_date[1],true_date[0]))
+            elif re.search('августа',strip_date) != None:
+                true_date = strip_date.split('августа')
+                com_reg_date.append('{}''-08-''{}'.format(true_date[1],true_date[0]))
+            elif re.search('сентября',strip_date) != None:
+                true_date = strip_date.split('сентября')
+                com_reg_date.append('{}''-09-''{}'.format(true_date[1],true_date[0]))
+            elif re.search('октября',strip_date) != None:
+                true_date = strip_date.split('октября')
+                com_reg_date.append('{}''-10-''{}'.format(true_date[1],true_date[0]))
+            elif re.search('ноября',strip_date) != None:
+                true_date = strip_date.split('ноября')
+                com_reg_date.append('{}''-11-''{}'.format(true_date[1],true_date[0]))
+            elif re.search('декабря',strip_date) != None:
+                true_date = strip_date.split('декабря')
+                com_reg_date.append('{}''-12-''{}'.format(true_date[1],true_date[0]))
 
             count_reg_date = count_reg_date + 3
 
